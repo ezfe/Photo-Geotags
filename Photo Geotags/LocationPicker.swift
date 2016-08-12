@@ -9,60 +9,59 @@
 import UIKit
 import MapKit
 
+import PhotoGeotagsKit
+
 class LocationPicker: UIViewController {
 
     var locations = [CLLocation]()
     @IBOutlet weak var map: MKMapView!
     
+    @IBOutlet weak var secondPicker: UISlider!
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var coordinateLabel: UILabel!
+    
     @IBAction func close(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func calculateLocation(at date: Date) {
-        if locations.count == 0 { print("No data to parse"); return }
+    func updateLocation(at date: Date) {
+        let coords = calculateLocation(at: date, locations: locations)
         
-        var smallDiff = abs(locations[0].timestamp.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate)
-        var smallLoc = locations[0]
+        coordinateLabel.text = "\(coords.coordinate.latitude), \(coords.coordinate.longitude)"
+        map.centerCoordinate = coords.coordinate
         
-        for (i, location) in locations.enumerated() {
-            let thisDifference = abs(location.timestamp.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate)
-            if thisDifference < smallDiff {
-                smallDiff = thisDifference
-                smallLoc = location
-            }
-        }
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coords.coordinate
+        annotation.title = coords.timestamp.description(with: Locale.current)
         
-        /*
-        //Where we are in relation to the nearest location
-        enum Relation { case after, before, at }
-        let interval = smallLoc.timestamp.timeIntervalSince(date)
+        map.removeAnnotations(map.annotations)
+        map.addAnnotation(annotation)
         
-        var relation = Relation.at
-         
-        if interval < 0 {
-        relation = .after
-        } else if interval > 0 {
-        relation = .before
-        }
-        */
-        
-        outputLabel.text = "\(smallLoc.coordinate.latitude), \(smallLoc.coordinate.longitude)"
-        map.centerCoordinate = smallLoc.coordinate
+        map.region = MKCoordinateRegion(center: coords.coordinate, span: MKCoordinateSpan(latitudeDelta: 0.001, longitudeDelta: 0.001))
     }
     
-    @IBOutlet weak var outputLabel: UILabel!
-    @IBOutlet weak var datePicker: UIDatePicker!
-    
     @IBAction func dateChanged(_ sender: AnyObject) {
-        calculateLocation(at: datePicker.date)
+        var date = datePicker.date
+        date.addTimeInterval(Double(secondPicker.value))
+        dateLabel.text = date.description(with: Locale.current)
+        updateLocation(at: date)
+        
+        print(date.description(with: Locale.current))
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        calculateLocation(at: datePicker.date)
+        guard let first = locations.first, let last = locations.last else {
+            print("No first/last")
+            return
+        }
         
-        // Do any additional setup after loading the view.
+        datePicker.minimumDate = first.timestamp
+        datePicker.maximumDate = last.timestamp
+        
+        dateChanged(self)
     }
 
     override func didReceiveMemoryWarning() {

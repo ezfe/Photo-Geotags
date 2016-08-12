@@ -19,26 +19,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJD-el-o4C"/>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pKP-ZP-pYZ">
+                                <connections>
+                                    <action selector="switchSwitch:" destination="WQh-Vd-sbz" eventType="valueChanged" id="Aiv-zE-xP0"/>
+                                </connections>
+                            </switch>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TeC-9W-cVv">
                                 <connections>
                                     <segue destination="BKH-VJ-UqK" kind="show" id="eHo-ht-Wzb"/>
                                 </connections>
                             </button>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pKP-ZP-pYZ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="27G-JO-YbD">
+                                <state key="normal" title="Upload"/>
                                 <connections>
-                                    <action selector="switchSwitch:" destination="WQh-Vd-sbz" eventType="valueChanged" id="Aiv-zE-xP0"/>
+                                    <action selector="upload:" destination="WQh-Vd-sbz" eventType="touchUpInside" id="nYH-8s-8mk"/>
                                 </connections>
-                            </switch>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vKu-kj-74Y"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="vKu-kj-74Y" firstAttribute="top" secondItem="27G-JO-YbD" secondAttribute="bottom" constant="-25" id="2Gi-yp-Bch"/>
                             <constraint firstItem="cJD-el-o4C" firstAttribute="leading" secondItem="pKP-ZP-pYZ" secondAttribute="trailing" constant="-65" id="8gQ-Yb-qfX"/>
                             <constraint firstItem="cJD-el-o4C" firstAttribute="leading" secondItem="76h-PV-xl3" secondAttribute="leading" id="FTr-CZ-51s"/>
                             <constraint firstItem="pKP-ZP-pYZ" firstAttribute="centerY" secondItem="TeC-9W-cVv" secondAttribute="centerY" id="KNU-0R-Djr"/>
+                            <constraint firstItem="vKu-kj-74Y" firstAttribute="leading" secondItem="27G-JO-YbD" secondAttribute="trailing" constant="-35" id="LjI-wi-HF3"/>
                             <constraint firstItem="TeC-9W-cVv" firstAttribute="leading" secondItem="cJD-el-o4C" secondAttribute="trailing" constant="-38" id="QvU-u0-voh"/>
                             <constraint firstItem="cJD-el-o4C" firstAttribute="top" secondItem="bTY-fG-sPT" secondAttribute="bottom" id="c1m-ez-WVk"/>
-                            <constraint firstItem="TeC-9W-cVv" firstAttribute="top" secondItem="cJD-el-o4C" secondAttribute="bottom" constant="-42" id="eS6-ec-ZfO"/>
-                            <constraint firstItem="yrZ-hI-v8d" firstAttribute="top" secondItem="cJD-el-o4C" secondAttribute="bottom" id="qmY-9e-482"/>
+                            <constraint firstItem="TeC-9W-cVv" firstAttribute="top" secondItem="cJD-el-o4C" secondAttribute="bottom" constant="17" id="eS6-ec-ZfO"/>
+                            <constraint firstItem="27G-JO-YbD" firstAttribute="centerX" secondItem="76h-PV-xl3" secondAttribute="centerX" id="kH1-tZ-c0c"/>
+                            <constraint firstItem="27G-JO-YbD" firstAttribute="centerY" secondItem="pKP-ZP-pYZ" secondAttribute="centerY" id="lXm-W8-fGL"/>
+                            <constraint firstItem="yrZ-hI-v8d" firstAttribute="top" secondItem="cJD-el-o4C" secondAttribute="bottom" constant="54" id="qmY-9e-482"/>
                             <constraint firstAttribute="trailing" secondItem="cJD-el-o4C" secondAttribute="trailing" id="zWC-n2-Bca"/>
                         </constraints>
                     </view>
@@ -46,6 +57,8 @@
                     <connections>
                         <outlet property="map" destination="cJD-el-o4C" id="FrK-SY-3i3"/>
                         <outlet property="record" destination="pKP-ZP-pYZ" id="IOD-DV-GjH"/>
+                        <outlet property="uploadButton" destination="27G-JO-YbD" id="JHc-V6-4WK"/>
+                        <outlet property="uploadStatus" destination="vKu-kj-74Y" id="PPB-sA-jZ6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0V-br-8PB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -64,31 +77,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="uph-fo-FeY">
-                                <frame key="frameInset" minY="451" height="216"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <date key="date" timeIntervalSinceReferenceDate="492615703.01579899">
-                                    <!--2016-08-11 13:41:43 +0000-->
-                                </date>
-                                <date key="minimumDate" timeIntervalSinceReferenceDate="473338800">
-                                    <!--2016-01-01 11:00:00 +0000-->
-                                </date>
-                                <date key="maximumDate" timeIntervalSinceReferenceDate="1577790000">
-                                    <!--2050-12-31 11:00:00 +0000-->
-                                </date>
-                                <connections>
-                                    <action selector="dateChanged:" destination="BKH-VJ-UqK" eventType="valueChanged" id="Gpu-fy-LTW"/>
-                                </connections>
-                            </datePicker>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7py-8j-gRJ">
-                                <frame key="frameInset" minX="16" minY="422" width="343" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="u6u-ZK-j3G">
-                                <frame key="frameInset" minX="16" minY="77" width="343" height="337"/>
+                                <frame key="frameInset" minX="16" minY="58" width="343" height="226"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fT-gf-ysH">
@@ -99,13 +89,46 @@
                                     <action selector="close:" destination="BKH-VJ-UqK" eventType="touchUpInside" id="WXy-PA-Czb"/>
                                 </connections>
                             </button>
+                            <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="30" minValue="0.0" maxValue="60" translatesAutoresizingMaskIntoConstraints="NO" id="QYD-G0-waD">
+                                <frame key="frameInset" minX="14" minY="413" width="347" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="dateChanged:" destination="BKH-VJ-UqK" eventType="valueChanged" id="grn-fZ-T3l"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="SELECTED DATE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ei3-qB-pK5">
+                                <frame key="frameInset" minX="16" minY="384" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="5Wu-0O-mLN">
+                                <frame key="frameInset" minY="451" height="216"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <date key="date" timeIntervalSinceReferenceDate="492698053.794034">
+                                    <!--2016-08-12 12:34:13 +0000-->
+                                </date>
+                                <connections>
+                                    <action selector="dateChanged:" destination="BKH-VJ-UqK" eventType="valueChanged" id="wLc-Jo-JUN"/>
+                                </connections>
+                            </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="LATITUDE, LONGITUDE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7py-8j-gRJ">
+                                <frame key="frameInset" minX="16" minY="355" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="datePicker" destination="uph-fo-FeY" id="egz-8A-xfT"/>
+                        <outlet property="coordinateLabel" destination="7py-8j-gRJ" id="38w-7B-fR2"/>
+                        <outlet property="dateLabel" destination="ei3-qB-pK5" id="VFe-PQ-d8O"/>
+                        <outlet property="datePicker" destination="5Wu-0O-mLN" id="pRO-D4-wN7"/>
                         <outlet property="map" destination="u6u-ZK-j3G" id="yZQ-Za-J6t"/>
-                        <outlet property="outputLabel" destination="7py-8j-gRJ" id="mzJ-de-5gT"/>
+                        <outlet property="secondPicker" destination="QYD-G0-waD" id="Bbp-ub-T4T"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YpR-Fx-Phb" userLabel="First Responder" sceneMemberID="firstResponder"/>
