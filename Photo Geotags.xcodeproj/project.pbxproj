@@ -7,23 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6605D0631D4A07CB002AC204 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6605D0621D4A07CB002AC204 /* HomeViewController.swift */; };
+		6661AB201D5CB11500C7BE96 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6661AB1F1D5CB11500C7BE96 /* MapKit.framework */; };
+		6661AB221D5CB87C00C7BE96 /* LocationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6661AB211D5CB87C00C7BE96 /* LocationPicker.swift */; };
 		66F60B821D47E3F60073A8F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F60B811D47E3F60073A8F2 /* AppDelegate.swift */; };
-		66F60B841D47E3F60073A8F2 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F60B831D47E3F60073A8F2 /* MasterViewController.swift */; };
-		66F60B861D47E3F60073A8F2 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F60B851D47E3F60073A8F2 /* DetailViewController.swift */; };
 		66F60B891D47E3F60073A8F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66F60B871D47E3F60073A8F2 /* Main.storyboard */; };
 		66F60B8B1D47E3F60073A8F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66F60B8A1D47E3F60073A8F2 /* Assets.xcassets */; };
 		66F60B8E1D47E3F60073A8F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66F60B8C1D47E3F60073A8F2 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6605D0621D4A07CB002AC204 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		6661AB1F1D5CB11500C7BE96 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		6661AB211D5CB87C00C7BE96 /* LocationPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPicker.swift; sourceTree = "<group>"; };
 		66F60B7E1D47E3F60073A8F2 /* Photo Geotags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Geotags.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66F60B811D47E3F60073A8F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		66F60B831D47E3F60073A8F2 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		66F60B851D47E3F60073A8F2 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		66F60B881D47E3F60073A8F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66F60B8A1D47E3F60073A8F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66F60B8D1D47E3F60073A8F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66F60B8F1D47E3F60073A8F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66F629AB1D5CCF1500FC3784 /* icon.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.sketch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +34,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6661AB201D5CB11500C7BE96 /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6661AB1E1D5CB11500C7BE96 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6661AB1F1D5CB11500C7BE96 /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		66F60B751D47E3F50073A8F2 = {
 			isa = PBXGroup;
 			children = (
 				66F60B801D47E3F60073A8F2 /* Photo Geotags */,
 				66F60B7F1D47E3F60073A8F2 /* Products */,
+				6661AB1E1D5CB11500C7BE96 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,9 +69,10 @@
 		66F60B801D47E3F60073A8F2 /* Photo Geotags */ = {
 			isa = PBXGroup;
 			children = (
+				66F629AB1D5CCF1500FC3784 /* icon.sketch */,
 				66F60B811D47E3F60073A8F2 /* AppDelegate.swift */,
-				66F60B831D47E3F60073A8F2 /* MasterViewController.swift */,
-				66F60B851D47E3F60073A8F2 /* DetailViewController.swift */,
+				6605D0621D4A07CB002AC204 /* HomeViewController.swift */,
+				6661AB211D5CB87C00C7BE96 /* LocationPicker.swift */,
 				66F60B871D47E3F60073A8F2 /* Main.storyboard */,
 				66F60B8A1D47E3F60073A8F2 /* Assets.xcassets */,
 				66F60B8C1D47E3F60073A8F2 /* LaunchScreen.storyboard */,
@@ -102,6 +116,11 @@
 						DevelopmentTeam = 39QG79F7FD;
 						DevelopmentTeamName = "Ezekiel Elin";
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -141,9 +160,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66F60B861D47E3F60073A8F2 /* DetailViewController.swift in Sources */,
-				66F60B841D47E3F60073A8F2 /* MasterViewController.swift in Sources */,
+				6605D0631D4A07CB002AC204 /* HomeViewController.swift in Sources */,
 				66F60B821D47E3F60073A8F2 /* AppDelegate.swift in Sources */,
+				6661AB221D5CB87C00C7BE96 /* LocationPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,6 +320,7 @@
 				66F60B941D47E3F60073A8F2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
