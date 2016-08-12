@@ -35,7 +35,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
             let polyline = MKPolyline(coordinates: points, count: points.count)
             map.add(polyline)
             
-            let data = NSKeyedArchiver.archivedData(withRootObject: locations)
+            let data = Converter.locations(locations: self.locations)
             defaults.set(data, forKey: locArrayKey)
         }
     }
@@ -47,13 +47,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
 
         self.map.delegate = self
         
-        if let locData = defaults.data(forKey: locArrayKey), let locarr = NSKeyedUnarchiver.unarchiveObject(with: locData) as? [CLLocation] {
-            self.locations = locarr
-        } else {
-            //Save, duplicate code
-            let data = NSKeyedArchiver.archivedData(withRootObject: locations)
-            defaults.set(data, forKey: locArrayKey)
-        }
+        self.locations = Converter.locations(data: defaults.data(forKey: locArrayKey))
  
         self.record.isOn = defaults.bool(forKey: recordingBool)
         
@@ -114,34 +108,34 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         
         let privateDB = CKContainer.default().privateCloudDatabase
         
-        
-        let truePredicate = NSPredicate(value: true)
-        let query = CKQuery(recordType: "LocationHistory", predicate: truePredicate)
-        
-        privateDB.perform(query, inZoneWith: nil) { (records, error) in
+        let alert = UIAlertController(title: "Enter Upload Name", message: "This name will allow you to identify the correct location set on your Mac", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { (alertAction) in
+            let record = CKRecord(recordType: "LocationHistory")
+
+            record.setValue(Converter.locations(locations: self.locations), forKey: "Data")
+            record.setValue(alert.textFields?[0].text ?? "Untitled", forKey: "Name")
             
-            guard let records = records else { print(error?.localizedDescription); return }
-            
-            let record: CKRecord
-            
-            if records.count == 0 {
-                record = CKRecord(recordType: "LocationHistory")
-            } else {
-                record = records[0]
-            }
-            
-            
-            record.setValue(NSKeyedArchiver.archivedData(withRootObject: self.locations), forKey: "Data")
             privateDB.save(record) { (record, error) in
                 guard let _ = record else {
                     print(error?.localizedDescription)
                     return
                 }
+                
                 print("Uploaded record...")
                 
-                self.uploadStatus.stopAnimating()
-                self.uploadButton.isHidden = false
+                DispatchQueue.main.async {
+                    self.locations.removeAll()
+                    
+                    self.uploadStatus.stopAnimating()
+                    self.uploadButton.isHidden = false
+                    
+                    let confirmAlert = UIAlertController(title: "Uploaded", message: "Your locations were successfully uploaded", preferredStyle: .alert)
+                    confirmAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self.present(confirmAlert, animated: true, completion: nil)
+                }
             }
-        }
+        }))
+        alert.addTextField(configurationHandler: nil)
+        self.present(alert, animated: true, completion: nil)
     }
 }

@@ -7,13 +7,21 @@
 //
 
 import UIKit
+import CoreLocation
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UITableViewController, CLLocationManagerDelegate {
 
     var detailViewController: DetailViewController? = nil
-    var objects = [AnyObject]()
-
-
+    var objects = [PhotoInfo]()
+    let locationManager = CLLocationManager()
+    var location: CLLocation? = nil
+    
+    var filePath: String {
+        let manager = FileManager.default
+        let url = manager.urlsForDirectory(.documentDirectory, inDomains: .userDomainMask).first!
+        return try! url.appendingPathComponent("objectsArray").path!
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -24,6 +32,20 @@ class MasterViewController: UITableViewController {
         if let split = self.splitViewController {
             let controllers = split.viewControllers
             self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
+        }
+        
+        if let array = NSKeyedUnarchiver.unarchiveObject(withFile: filePath) as? [PhotoInfo] {
+            objects = array
+        } else {
+            print("Unable to load...")
+        }
+        
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.activityType = .other
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
         }
     }
 
@@ -38,21 +60,38 @@ class MasterViewController: UITableViewController {
     }
 
     func insertNewObject(_ sender: AnyObject) {
-        objects.insert(NSDate(), at: 0)
+        let number = (objects.sorted().last?.number ?? 0) + 1
+        
+        guard let loc = self.location else {
+            print("An error occurred getting location!")
+            return
+        }
+        
+        let photo = PhotoInfo(location: loc, number: number)
+        objects.insert(photo, at: 0)
         let indexPath = IndexPath(row: 0, section: 0)
         self.tableView.insertRows(at: [indexPath], with: .automatic)
+        
+        NSKeyedArchiver.archiveRootObject(objects, toFile: filePath)        
     }
-
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let loc = locations.first {
+            self.location = loc
+        }
+    }
+    
     // MARK: - Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row] as! NSDate
                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
+                let photo = objects[indexPath.row]
+                controller.detailItem = photo
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
+                controller.navigationItem.title = "Photo \(photo.number)"
             }
         }
     }
@@ -69,9 +108,8 @@ class MasterViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        let object = objects[indexPath.row]
+        cell.textLabel!.text = object.location.timestamp.description
         return cell
     }
 
@@ -91,4 +129,3 @@ class MasterViewController: UITableViewController {
 
 
 }
-

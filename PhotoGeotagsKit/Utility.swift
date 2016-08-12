@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 
 public func calculateLocation(at date: Date, locations: [CLLocation]) -> CLLocation {
-    if locations.count == 0 { assert(false); return CLLocation() }
+    if locations.count == 0 { return CLLocation() }
     
     var smallDiff = abs(locations[0].timestamp.timeIntervalSinceReferenceDate - date.timeIntervalSinceReferenceDate)
     var smallLoc = locations[0]
@@ -24,4 +24,19 @@ public func calculateLocation(at date: Date, locations: [CLLocation]) -> CLLocat
     }
     
     return smallLoc
+}
+
+public class Converter {
+    
+    static public func locations(locations: [CLLocation]) -> Data {
+        return NSKeyedArchiver.archivedData(withRootObject: locations)
+    }
+    
+    static public func locations(data: Data?) -> [CLLocation] {
+        if let data = data, let locationArray = NSKeyedUnarchiver.unarchiveObject(with: data) as? [CLLocation] {
+            return locationArray
+        } else {
+            return [CLLocation]()
+        }
+    }
 }

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11185.3" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11185.3"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -653,7 +654,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Photo_Geotags_macOS" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="0.0"/>
@@ -679,15 +680,107 @@
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Photo_Geotags_macOS" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="328"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ICb-ZI-cGm">
+                                <rect key="frame" x="18" y="284" width="314" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="ZFA-w9-7EL"/>
+                                </constraints>
+                                <popUpButtonCell key="cell" type="push" title="Loading..." bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" enabled="NO" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="j9C-24-dZe" id="0Q1-D6-0Rf">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="VBQ-Cs-ylP">
+                                        <items>
+                                            <menuItem title="Loading..." state="on" id="j9C-24-dZe"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="recordUpdate:" target="XfG-lQ-9wD" id="uxb-3C-hHD"/>
+                                </connections>
+                            </popUpButton>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lXe-Hl-kuA">
+                                <rect key="frame" x="411" y="280" width="47" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="hqE-PB-khD"/>
+                                    <constraint firstAttribute="height" constant="21" id="uNs-4D-p4T"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" bezelStyle="rounded" image="NSRefreshTemplate" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ra8-GS-oQN">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="refreshButtonAction:" target="XfG-lQ-9wD" id="Dcd-L2-iA4"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="nBr-Ib-rPy">
+                                <rect key="frame" x="331" y="280" width="80" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="APw-Ij-pHG"/>
+                                    <constraint firstAttribute="width" constant="68" id="kHv-y6-EZp"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Delete" bezelStyle="rounded" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="aNt-dV-V6N">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="deleteCurrentRecord:" target="XfG-lQ-9wD" id="psL-s8-wtl"/>
+                                </connections>
+                            </button>
+                            <datePicker verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fef-vc-3tb">
+                                <rect key="frame" x="20" y="256" width="183" height="27"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="SQx-Zb-cIQ">
+                                    <font key="font" metaFont="system"/>
+                                    <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
+                                        <!--1982-02-12 08:00:00 -0800-->
+                                        <timeZone key="timeZone" name="US/Pacific"/>
+                                    </calendarDate>
+                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" hour="YES" minute="YES" second="YES"/>
+                                </datePickerCell>
+                                <connections>
+                                    <action selector="dateChanged:" target="XfG-lQ-9wD" id="LiB-Ng-7WV"/>
+                                </connections>
+                            </datePicker>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QnL-yU-g9x">
+                                <rect key="frame" x="206" y="259" width="201" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="gES-f6-547">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="ICb-ZI-cGm" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="2M7-2i-U1A"/>
+                            <constraint firstItem="lXe-Hl-kuA" firstAttribute="leading" secondItem="nBr-Ib-rPy" secondAttribute="trailing" constant="12" id="8Os-Wl-n2K"/>
+                            <constraint firstItem="ICb-ZI-cGm" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="HMd-0y-cPu"/>
+                            <constraint firstAttribute="trailing" secondItem="lXe-Hl-kuA" secondAttribute="trailing" constant="28" id="IOR-l4-2zj"/>
+                            <constraint firstItem="nBr-Ib-rPy" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="LvC-wN-MKG"/>
+                            <constraint firstItem="nBr-Ib-rPy" firstAttribute="leading" secondItem="ICb-ZI-cGm" secondAttribute="trailing" constant="8" id="gQo-eu-cDl"/>
+                            <constraint firstItem="lXe-Hl-kuA" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="suS-pu-Ne9"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="datePicker" destination="Fef-vc-3tb" id="WNi-f5-lla"/>
+                        <outlet property="deleteButton" destination="nBr-Ib-rPy" id="PBR-O2-gJ4"/>
+                        <outlet property="locationLabel" destination="QnL-yU-g9x" id="RLy-ku-P4p"/>
+                        <outlet property="recordChooser" destination="ICb-ZI-cGm" id="Rhx-Bc-Gwf"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="75" y="684"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="NSRefreshTemplate" width="11" height="15"/>
+    </resources>
 </document>
