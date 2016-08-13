@@ -106,8 +106,6 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         uploadButton.isHidden = true
         uploadStatus.startAnimating()
         
-        let privateDB = CKContainer.default().privateCloudDatabase
-        
         let alert = UIAlertController(title: "Enter Upload Name", message: "This name will allow you to identify the correct location set on your Mac", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { (alertAction) in
             let record = CKRecord(recordType: "LocationHistory")
@@ -115,7 +113,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
             record.setValue(Converter.locations(locations: self.locations), forKey: "Data")
             record.setValue(alert.textFields?[0].text ?? "Untitled", forKey: "Name")
             
-            privateDB.save(record) { (record, error) in
+            database.save(record) { (record, error) in
                 guard let _ = record else {
                     print(error?.localizedDescription)
                     return

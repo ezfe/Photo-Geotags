@@ -7,6 +7,10 @@
 //
 
 import Foundation
+import CloudKit
 
 public let locArrayKey = "locations"
 public let recordingBool = "recordingLocation"
+
+public let container = CKContainer(identifier: "iCloud.com.ezekielelin.Photo-Geotags")
+public let database = container.privateCloudDatabase

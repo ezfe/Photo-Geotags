@@ -112,7 +112,7 @@
 		66F60B8A1D47E3F60073A8F2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66F60B8D1D47E3F60073A8F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66F60B8F1D47E3F60073A8F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		66F629AB1D5CCF1500FC3784 /* icon.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; path = icon.sketch; sourceTree = "<group>"; };
+		66F629AB1D5CCF1500FC3784 /* icon.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; name = icon.sketch; path = "Photo Geotags/icon.sketch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +191,7 @@
 		66F60B751D47E3F50073A8F2 = {
 			isa = PBXGroup;
 			children = (
+				66F629AB1D5CCF1500FC3784 /* icon.sketch */,
 				66F60B801D47E3F60073A8F2 /* Photo Geotags */,
 				6621E6FA1D5E37BF00B42F10 /* Photo Geotags macOS */,
 				6627544B1D5E009600CC41FE /* PhotoGeotagsKit */,
@@ -214,7 +215,6 @@
 			isa = PBXGroup;
 			children = (
 				662754611D5E24F000CC41FE /* Photo Geotags.entitlements */,
-				66F629AB1D5CCF1500FC3784 /* icon.sketch */,
 				66F60B811D47E3F60073A8F2 /* AppDelegate.swift */,
 				6605D0621D4A07CB002AC204 /* HomeViewController.swift */,
 				6661AB211D5CB87C00C7BE96 /* LocationPicker.swift */,
@@ -792,6 +792,7 @@
 				6621E7071D5E37BF00B42F10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6621E71E1D5E5B1500B42F10 /* Build configuration list for PBXNativeTarget "PhotoGeotagsKit macOS" */ = {
 			isa = XCConfigurationList;
@@ -800,6 +801,7 @@
 				6621E7201D5E5B1500B42F10 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		662754531D5E009600CC41FE /* Build configuration list for PBXNativeTarget "PhotoGeotagsKit" */ = {
 			isa = XCConfigurationList;

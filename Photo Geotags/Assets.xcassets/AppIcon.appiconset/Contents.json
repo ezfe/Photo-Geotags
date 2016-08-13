@@ -1,51 +1,47 @@
 {
   "images" : [
     {
-      "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "Artboard40.png",
+      "size" : "20x20",
       "scale" : "2x"
     },
     {
       "size" : "20x20",
       "idiom" : "iphone",
-      "filename" : "Artboard60.png",
+      "filename" : "iPhone Notification@3x.png",
       "scale" : "3x"
     },
     {
-      "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "Artboard58.png",
+      "size" : "29x29",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "Artboard87.png",
+      "filename" : "iPhone Settings@3x.png",
       "scale" : "3x"
     },
     {
+      "idiom" : "iphone",
       "size" : "40x40",
-      "idiom" : "iphone",
-      "filename" : "Artboard80.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "Artboard120.png",
+      "filename" : "iPhone Spotlight@3x.png",
       "scale" : "3x"
     },
     {
+      "idiom" : "iphone",
       "size" : "60x60",
-      "idiom" : "iphone",
-      "filename" : "Artboard120-1.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "Artboard180.png",
+      "filename" : "iPhone App@3x.png",
       "scale" : "3x"
     },
     {
@@ -56,7 +52,7 @@
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "Artboard40-1.png",
+      "filename" : "iPad Notification@2x.png",
       "scale" : "2x"
     },
     {
@@ -67,37 +63,35 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "Artboard58-1.png",
+      "filename" : "iPad Settings@2x.png",
       "scale" : "2x"
     },
     {
-      "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "Artboard40-2.png",
+      "size" : "40x40",
       "scale" : "1x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "Artboard80-1.png",
+      "filename" : "iPad Spotlight@3x.png",
       "scale" : "2x"
     },
     {
-      "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "Artboard76.png",
+      "size" : "76x76",
       "scale" : "1x"
     },
     {
       "size" : "76x76",
       "idiom" : "ipad",
-      "filename" : "Artboard152.png",
+      "filename" : "iPad App@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "83.5x83.5",
       "idiom" : "ipad",
-      "filename" : "Artboard167.png",
+      "filename" : "iPad Pro App@2x.png",
       "scale" : "2x"
     }
   ],
