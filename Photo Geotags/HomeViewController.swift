@@ -21,22 +21,27 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     @IBOutlet weak var uploadButton: UIButton!
     @IBOutlet weak var uploadStatus: UIActivityIndicatorView!
     
+    //TODO: Revert this to UserDefaults.default
     let defaults = UserDefaults(suiteName: "group.com.ezekielelin.photogeotags")!
     
     var locations = [CLLocation]() {
         didSet {
-            if locations.count == 0 { return }
+            map.removeOverlays(map.overlays)
             
-            let points = locations.map { (location) -> CLLocationCoordinate2D in
-                return location.coordinate
+            if locations.count > 0 {
+                let points = locations.map { (location) -> CLLocationCoordinate2D in
+                    return location.coordinate
+                }
+                
+                let polyline = MKPolyline(coordinates: points, count: points.count)
+                map.add(polyline)
+                
+                let data = Converter.locations(locations: self.locations)
+                defaults.set(data, forKey: locArrayKey)
+            } else {
+                print("No locations, nothing to draw")
             }
             
-            map.removeOverlays(map.overlays)
-            let polyline = MKPolyline(coordinates: points, count: points.count)
-            map.add(polyline)
-            
-            let data = Converter.locations(locations: self.locations)
-            defaults.set(data, forKey: locArrayKey)
         }
     }
     
@@ -105,12 +110,23 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
     @IBAction func upload(_ sender: AnyObject) {
         uploadButton.isHidden = true
         uploadStatus.startAnimating()
-        
-        let alert = UIAlertController(title: "Enter Upload Name", message: "This name will allow you to identify the correct location set on your Mac", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { (alertAction) in
-            let record = CKRecord(recordType: "LocationHistory")
 
-            record.setValue(Converter.locations(locations: self.locations), forKey: "Data")
+        let locationData = Converter.locations(locations: self.locations)
+        let count = Double(locationData.count)
+        let message: String
+        if count < 1000 {
+            message = "\(count) B"
+        } else if count < 1000000 {
+            message = "\(count/1000) KB"
+        } else {
+            message = "\(count/1000) MB"
+        }
+        
+        let alert = UIAlertController(title: "Enter Upload Name", message: "This upload will be \(message).\n\nYou will need to choose from a list of your past uploads, so you should use a unique identifying title.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Confirm", style: .default, handler: { (_) in
+            let record = CKRecord(recordType: "LocationHistory")
+            
+            record.setValue(locationData, forKey: "Data")
             record.setValue(alert.textFields?[0].text ?? "Untitled", forKey: "Name")
             
             database.save(record) { (record, error) in
@@ -132,6 +148,15 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
                     self.present(confirmAlert, animated: true, completion: nil)
                 }
             }
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+            
+            DispatchQueue.main.async {
+                self.uploadStatus.stopAnimating()
+                self.uploadButton.isHidden = false
+            }
+            
+            print("Canceled")
         }))
         alert.addTextField(configurationHandler: nil)
         self.present(alert, animated: true, completion: nil)

@@ -10,6 +10,8 @@ import Cocoa
 import CloudKit
 import PhotoGeotagsKit
 import MapKit
+import CoreImage
+import CoreMedia
 
 class ViewController: NSViewController {
 
@@ -26,6 +28,8 @@ class ViewController: NSViewController {
         super.viewDidLoad()
         
         refreshRecords()
+        
+        datePicker.timeZone = TimeZone.current
         
         // Do any additional setup after loading the view.
     }
@@ -53,6 +57,9 @@ class ViewController: NSViewController {
     func setIsEnabled(_ value: Bool) {
         recordChooser.isEnabled = value
         deleteButton.isEnabled = value
+        
+        datePicker.isHidden = !value
+        locationLabel.isHidden = !value
     }
     
     func updateUI() {
@@ -63,8 +70,10 @@ class ViewController: NSViewController {
             }))
             
             if let minDate = locations.first?.timestamp, let maxDate = locations.last?.timestamp {
+                /*
                 self.datePicker.minDate = minDate
                 self.datePicker.maxDate = maxDate
+                */
             }
             
             enableAll()
@@ -156,5 +165,146 @@ class ViewController: NSViewController {
         let location = calculateLocation(at: date, locations: locations)
         locationLabel.stringValue = "\(location.coordinate.latitude), \(location.coordinate.longitude)"
     }
+    
+    @IBAction func loadFromPhotos(_ sender: AnyObject) {
+        var script = "tell application \"Photos\""
+        script += "\n\tset currentSelection to the selection"
+        script += "\n\tif currentSelection is {} then error number -28"
+        script += "\n\tset thisItem to item 1 of currentSelection"
+        script += "\n\t(the date of thisItem) as string"
+        script += "\nend tell"
+        var error: NSDictionary?
+        
+        var date: Date
+        
+        if let scriptObject = NSAppleScript(source: script) {
+            if let output: NSAppleEventDescriptor = scriptObject.executeAndReturnError(&error), let returnedText = output.stringValue {
+                //Parse Date
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "EEEE, MMMM d, y 'at' h:mm:ss a"
+                guard let parsed = dateFormatter.date(from: returnedText) else {
+                    print("Unable to get date")
+                    print(returnedText)
+                    return
+                }
+                
+                date = parsed
+            } else if (error != nil) {
+                print("error: \(error)")
+                return
+            } else {
+                print("error...")
+                return
+            }
+        } else {
+            print("Unable to create script")
+            return
+        }
+        
+        datePicker.dateValue = date
+        dateChanged(sender)
+        
+        let location = calculateLocation(at: date, locations: self.locations)
+        let string = "\(location.coordinate.latitude), \(location.coordinate.longitude)"
+        
+        NSPasteboard.general().clearContents()
+        NSPasteboard.general().setString(string, forType: NSStringPboardType)
+        
+        NSAppleScript(source: "tell application \"Photos\" to activate")!.executeAndReturnError(nil)
+    }
+    
+    @IBOutlet weak var imageWell: NSImageCell!
+    @IBAction func imageWellChange(_ sender: AnyObject) {
+        guard let image = imageWell.image else {
+            print("No Image...")
+            return
+        }
+        
+        /* Calculate date of photo */
+        var dateOpt: Date? = nil
+        
+        for representation in image.representations {
+            if let bitmap = representation as? NSBitmapImageRep {
+                
+                let exif = bitmap.value(forProperty: NSImageEXIFData)
+                guard let dateString = exif?["DateTimeOriginal"] as? String else {
+                    print("Unable to read DateTimeOriginal")
+                    print(exif)
+                    return
+                }
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy:MM:dd HH:mm:ss"
+                guard let parsed = dateFormatter.date(from: dateString) else {
+                    print("Unable to parse DateTimeOriginal as a Date object")
+                    print(dateString)
+                    return
+                }
+                
+                dateOpt = parsed
+            }
+        }
+        
+        guard let date = dateOpt else {
+            print("No date found")
+            return
+        }
+        
+        let location = calculateLocation(at: date, locations: locations)
+        
+        /* Store Location */
+        
+        let source = CGImageSourceCreateWithData(image.tiffRepresentation! as CFData, nil)!
+        
+        guard let metadata = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as NSDictionary? else {
+            print("Unable to convert to NSDictionary")
+            return
+        }
+        
+        let metadataAsMutable = metadata.mutableCopy()
+        
+        let GPSDictionary = NSMutableDictionary()
+        
+        GPSDictionary.setValue(abs(location.coordinate.latitude), forKey: kCGImagePropertyGPSLatitude as String)
+        if location.coordinate.latitude < 0 {
+            GPSDictionary.setValue("S", forKey: kCGImagePropertyGPSLatitudeRef as String)
+        } else {
+            GPSDictionary.setValue("N", forKey: kCGImagePropertyGPSLatitudeRef as String)
+        }
+        
+        GPSDictionary.setValue(abs(location.coordinate.longitude), forKey: kCGImagePropertyGPSLongitude as String)
+        if location.coordinate.longitude < 0 {
+            GPSDictionary.setValue("W", forKey: kCGImagePropertyGPSLongitudeRef as String)
+        } else {
+            GPSDictionary.setValue("E", forKey: kCGImagePropertyGPSLongitudeRef as String)
+        }
+        
+        GPSDictionary.setValue(location.altitude, forKey: kCGImagePropertyGPSAltitude as String)
+        GPSDictionary.setValue(0, forKey: kCGImagePropertyGPSAltitudeRef as String)
+        
+        metadataAsMutable.setValue(GPSDictionary, forKey: kCGImagePropertyGPSDictionary as String)
+        
+        let UTI = CGImageSourceGetType(source)!
+        let data = NSMutableData()
+        let destination = CGImageDestinationCreateWithData(data as CFMutableData, UTI, 1, nil)!
+        
+        CGImageDestinationAddImageFromSource(destination, source, 0, metadataAsMutable as! CFDictionary)
+        
+        print(CGImageDestinationFinalize(destination))
+        
+        try! data.write(toFile: "/Users/ezekielelin/Desktop/test.jpg", options: .atomic)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
 
