@@ -216,6 +216,8 @@ class ViewController: NSViewController {
     
     @IBOutlet weak var imageWell: NSImageCell!
     @IBAction func imageWellChange(_ sender: AnyObject) {
+        //TODO: Implementation
+        /*
         guard let image = imageWell.image else {
             print("No Image...")
             return
@@ -294,6 +296,7 @@ class ViewController: NSViewController {
         print(CGImageDestinationFinalize(destination))
         
         try! data.write(toFile: "/Users/ezekielelin/Desktop/test.jpg", options: .atomic)
+         */
     }
 }
 
