@@ -14,15 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     let defaults = UserDefaults(suiteName: "group.com.ezekielelin.photogeotags")!
     
     var window: UIWindow?
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        // Override point for customization after application launch.
-        /*
-        let splitViewController = self.window!.rootViewController as! UISplitViewController
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
-        splitViewController.delegate = self
-        */
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
         return true
     }
 

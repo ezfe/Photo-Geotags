@@ -113,10 +113,10 @@ class ViewController: NSViewController {
     
     ///Returns the selected record, or nil
     func selectedRecord() -> CKRecord? {
-        if !recordChooser.isEnabled {
-            print("Record chooser disabled, assuming no record available")
-            return nil
-        }
+//        if !recordChooser.isEnabled {
+//            print("Record chooser disabled, assuming no record available")
+//            return nil
+//        }
         
         let index = recordChooser.indexOfSelectedItem
         if records.count <= index || records.count == 0 {

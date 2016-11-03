@@ -36,12 +36,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
                 let polyline = MKPolyline(coordinates: points, count: points.count)
                 map.add(polyline)
                 
-                let data = Converter.locations(locations: self.locations)
-                defaults.set(data, forKey: locArrayKey)
             } else {
                 print("No locations, nothing to draw")
             }
-            
+            let data = Converter.locations(locations: self.locations)
+            defaults.set(data, forKey: locArrayKey)            
         }
     }
     
@@ -57,32 +56,38 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         self.record.isOn = defaults.bool(forKey: recordingBool)
         
         defaults.bool(forKey: recordingBool)
-        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.delegate = self
             locationManager.activityType = .other
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.distanceFilter = CLLocationDistance(exactly: 10.0)!
+            locationManager.pausesLocationUpdatesAutomatically = false
+            locationManager.allowsBackgroundLocationUpdates = true
             if defaults.bool(forKey: recordingBool) {
                 locationManager.startUpdatingLocation()
             }
         }
     }
-
+    
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let adding = locations.first else {
             return
         }
         
-        if let last = self.locations.last {
-            let latdiff = abs(last.coordinate.latitude - adding.coordinate.latitude)
-            let londiff = abs(last.coordinate.longitude - adding.coordinate.longitude)
-            
-            if latdiff > 0.00005 || londiff > 0.00005 {
-                self.locations.append(adding)
-            }
-        } else {
-            self.locations.append(adding)
-        }
+        self.locations.append(adding)
+//
+//        
+//        if let last = self.locations.last {
+//            let latdiff = abs(last.coordinate.latitude - adding.coordinate.latitude)
+//            let londiff = abs(last.coordinate.longitude - adding.coordinate.longitude)
+//            
+//            if latdiff > 0.00005 || londiff > 0.00005 {
+//                self.locations.append(adding)
+//            }
+//        } else {
+//            self.locations.append(adding)
+//        }
     }
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -92,10 +97,11 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
         return renderer
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? LocationPicker {
             destination.locations = self.locations
         }
+
     }
     
     @IBAction func switchSwitch(_ sender: AnyObject) {
