@@ -8,8 +8,8 @@
 
 import UIKit
 import MapKit
+import CloudKit
 
-import PhotoGeotagsKit
 
 class LocationPicker: UIViewController {
 
@@ -20,6 +20,15 @@ class LocationPicker: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var coordinateLabel: UILabel!
+    
+    @IBAction func share(sender: UIButton) {
+        let data = Converter.locations(locations: self.locations)
+        let str = data.base64EncodedString()
+        
+        let vc = UIActivityViewController(activityItems: [str as NSString], applicationActivities: nil)
+        present(vc, animated: true, completion: nil)
+    
+    }
     
     @IBAction func close(_ sender: AnyObject) {
         self.dismiss(animated: true, completion: nil)
@@ -62,6 +71,30 @@ class LocationPicker: UIViewController {
         datePicker.maximumDate = last.timestamp
         
         dateChanged(self)
+        
+        let truePredicate = NSPredicate(value: true)
+        let query = CKQuery(recordType: "LocationHistory", predicate: truePredicate)
+        
+        database.perform(query, inZoneWith: nil) { (records, error) in            
+            guard let records = records else {
+                print(error?.localizedDescription ?? "Unknown error")
+                return
+            }
+            
+            if records.count == 0 {
+                print("No records received")
+            } else {
+                for record in records {
+                let locations = Converter.locations(data: record["Data"] as? Data)
+                let date = Date()
+                
+                let location = calculateLocation(at: date, locations: locations)
+                let string = "\(location.coordinate.latitude), \(location.coordinate.longitude)"
+                
+                print(string)
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

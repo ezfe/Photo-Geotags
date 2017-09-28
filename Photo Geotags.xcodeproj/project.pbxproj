@@ -13,23 +13,23 @@
 		6621E6FE1D5E37BF00B42F10 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6621E6FD1D5E37BF00B42F10 /* ViewController.swift */; };
 		6621E7001D5E37BF00B42F10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6621E6FF1D5E37BF00B42F10 /* Assets.xcassets */; };
 		6621E7031D5E37BF00B42F10 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6621E7011D5E37BF00B42F10 /* Main.storyboard */; };
-		6621E70A1D5E37C800B42F10 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6621E7091D5E37C800B42F10 /* CloudKit.framework */; };
 		6621E7211D5E5BD500B42F10 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662754631D5E255A00CC41FE /* Constants.swift */; };
 		6621E7221D5E5BD700B42F10 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662754561D5E00A500CC41FE /* Utility.swift */; };
 		6621E7231D5E5BDA00B42F10 /* PhotoGeotagsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6627544C1D5E009600CC41FE /* PhotoGeotagsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6621E7241D5E5C0700B42F10 /* PhotoGeotagsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6621E7151D5E5B1500B42F10 /* PhotoGeotagsKit.framework */; };
 		6621E7251D5E5C0700B42F10 /* PhotoGeotagsKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6621E7151D5E5B1500B42F10 /* PhotoGeotagsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6621E7291D5E5C1B00B42F10 /* PhotoGeotagsKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6627544A1D5E009600CC41FE /* PhotoGeotagsKit.framework */; };
-		6621E72A1D5E5C1B00B42F10 /* PhotoGeotagsKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6627544A1D5E009600CC41FE /* PhotoGeotagsKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6627544E1D5E009600CC41FE /* PhotoGeotagsKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6627544C1D5E009600CC41FE /* PhotoGeotagsKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		662754581D5E013A00CC41FE /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662754561D5E00A500CC41FE /* Utility.swift */; };
 		662754641D5E255A00CC41FE /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 662754631D5E255A00CC41FE /* Constants.swift */; };
 		6661AB201D5CB11500C7BE96 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6661AB1F1D5CB11500C7BE96 /* MapKit.framework */; };
 		6661AB221D5CB87C00C7BE96 /* LocationPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6661AB211D5CB87C00C7BE96 /* LocationPicker.swift */; };
+		66EE2AF91F15567900B2D479 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 666EA39D1F155183009CBF89 /* CloudKit.framework */; };
 		66F60B821D47E3F60073A8F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66F60B811D47E3F60073A8F2 /* AppDelegate.swift */; };
 		66F60B891D47E3F60073A8F2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66F60B871D47E3F60073A8F2 /* Main.storyboard */; };
 		66F60B8B1D47E3F60073A8F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66F60B8A1D47E3F60073A8F2 /* Assets.xcassets */; };
 		66F60B8E1D47E3F60073A8F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66F60B8C1D47E3F60073A8F2 /* LaunchScreen.storyboard */; };
+		66FC36C31F15533C00C6E7F1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FC36C11F15532600C6E7F1 /* Utility.swift */; };
+		66FC36C41F15533E00C6E7F1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66FC36C21F15532700C6E7F1 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,13 +39,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = 6621E7141D5E5B1500B42F10;
 			remoteInfo = "PhotoGeotagsKit macOS";
-		};
-		6621E72B1D5E5C1B00B42F10 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 66F60B761D47E3F50073A8F2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 662754491D5E009600CC41FE;
-			remoteInfo = PhotoGeotagsKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -57,17 +50,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				6621E7251D5E5C0700B42F10 /* PhotoGeotagsKit.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6621E72D1D5E5C1C00B42F10 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				6621E72A1D5E5C1B00B42F10 /* PhotoGeotagsKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,6 +88,7 @@
 		662754631D5E255A00CC41FE /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		6661AB1F1D5CB11500C7BE96 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6661AB211D5CB87C00C7BE96 /* LocationPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationPicker.swift; sourceTree = "<group>"; };
+		666EA39D1F155183009CBF89 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/System/Library/Frameworks/CloudKit.framework; sourceTree = DEVELOPER_DIR; };
 		66F60B7E1D47E3F60073A8F2 /* Photo Geotags.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Photo Geotags.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66F60B811D47E3F60073A8F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66F60B881D47E3F60073A8F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -113,6 +96,8 @@
 		66F60B8D1D47E3F60073A8F2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66F60B8F1D47E3F60073A8F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66F629AB1D5CCF1500FC3784 /* icon.sketch */ = {isa = PBXFileReference; lastKnownFileType = file; name = icon.sketch; path = "Photo Geotags/icon.sketch"; sourceTree = "<group>"; };
+		66FC36C11F15532600C6E7F1 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		66FC36C21F15532700C6E7F1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,8 +105,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6621E70A1D5E37C800B42F10 /* CloudKit.framework in Frameworks */,
 				6621E7241D5E5C0700B42F10 /* PhotoGeotagsKit.framework in Frameworks */,
+				66EE2AF91F15567900B2D479 /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +128,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6621E7291D5E5C1B00B42F10 /* PhotoGeotagsKit.framework in Frameworks */,
 				6621E6F41D5E322E00B42F10 /* CloudKit.framework in Frameworks */,
 				6661AB201D5CB11500C7BE96 /* MapKit.framework in Frameworks */,
 			);
@@ -181,6 +165,7 @@
 			children = (
 				6621E7091D5E37C800B42F10 /* CloudKit.framework */,
 				6621E6F31D5E322E00B42F10 /* CloudKit.framework */,
+				666EA39D1F155183009CBF89 /* CloudKit.framework */,
 				6661AB1F1D5CB11500C7BE96 /* MapKit.framework */,
 				6627541F1D5DFCA800CC41FE /* PhotosUI.framework */,
 				662754211D5DFCA800CC41FE /* Photos.framework */,
@@ -218,6 +203,8 @@
 				66F60B811D47E3F60073A8F2 /* AppDelegate.swift */,
 				6605D0621D4A07CB002AC204 /* HomeViewController.swift */,
 				6661AB211D5CB87C00C7BE96 /* LocationPicker.swift */,
+				66FC36C11F15532600C6E7F1 /* Utility.swift */,
+				66FC36C21F15532700C6E7F1 /* Constants.swift */,
 				66F60B871D47E3F60073A8F2 /* Main.storyboard */,
 				66F60B8A1D47E3F60073A8F2 /* Assets.xcassets */,
 				66F60B8C1D47E3F60073A8F2 /* LaunchScreen.storyboard */,
@@ -311,12 +298,10 @@
 				66F60B7B1D47E3F60073A8F2 /* Frameworks */,
 				66F60B7C1D47E3F60073A8F2 /* Resources */,
 				662754301D5DFCA800CC41FE /* Embed App Extensions */,
-				6621E72D1D5E5C1C00B42F10 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				6621E72C1D5E5C1B00B42F10 /* PBXTargetDependency */,
 			);
 			name = "Photo Geotags";
 			productName = "Photo Geotags";
@@ -330,12 +315,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Ezekiel Elin";
 				TargetAttributes = {
 					6621E6F81D5E37BF00B42F10 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 39QG79F7FD;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Push = {
@@ -349,18 +335,19 @@
 					6621E7141D5E5B1500B42F10 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 39QG79F7FD;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					662754491D5E009600CC41FE = {
 						CreatedOnToolsVersion = 8.0;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 					};
 					66F60B7D1D47E3F60073A8F2 = {
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 39QG79F7FD;
 						DevelopmentTeamName = "Ezekiel Elin";
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0900;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
@@ -471,6 +458,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66FC36C41F15533E00C6E7F1 /* Constants.swift in Sources */,
+				66FC36C31F15533C00C6E7F1 /* Utility.swift in Sources */,
 				6605D0631D4A07CB002AC204 /* HomeViewController.swift in Sources */,
 				66F60B821D47E3F60073A8F2 /* AppDelegate.swift in Sources */,
 				6661AB221D5CB87C00C7BE96 /* LocationPicker.swift in Sources */,
@@ -484,11 +473,6 @@
 			isa = PBXTargetDependency;
 			target = 6621E7141D5E5B1500B42F10 /* PhotoGeotagsKit macOS */;
 			targetProxy = 6621E7261D5E5C0700B42F10 /* PBXContainerItemProxy */;
-		};
-		6621E72C1D5E5C1B00B42F10 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 662754491D5E009600CC41FE /* PhotoGeotagsKit */;
-			targetProxy = 6621E72B1D5E5C1B00B42F10 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -536,7 +520,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ezekielelin.Photo-Geotags-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -556,7 +541,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ezekielelin.Photo-Geotags-macOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
@@ -581,7 +567,8 @@
 				PRODUCT_NAME = PhotoGeotagsKit;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -608,7 +595,8 @@
 				PRODUCT_NAME = PhotoGeotagsKit;
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -634,7 +622,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -659,7 +648,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ezekielelin.PhotoGeotagsKit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -674,7 +664,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -682,7 +674,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -725,7 +721,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -733,7 +731,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -763,18 +765,19 @@
 		66F60B931D47E3F60073A8F2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Photo Geotags/Photo Geotags.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 39QG79F7FD;
 				INFOPLIST_FILE = "Photo Geotags/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ezekielelin.Photo-Geotags";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -782,16 +785,17 @@
 		66F60B941D47E3F60073A8F2 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "Photo Geotags/Photo Geotags.entitlements";
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				DEVELOPMENT_TEAM = 39QG79F7FD;
 				INFOPLIST_FILE = "Photo Geotags/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.ezekielelin.Photo-Geotags";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

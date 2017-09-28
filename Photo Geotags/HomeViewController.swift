@@ -11,7 +11,6 @@ import CoreLocation
 import MapKit
 import CloudKit
 
-import PhotoGeotagsKit
 
 class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
     
@@ -137,7 +136,7 @@ class HomeViewController: UIViewController, CLLocationManagerDelegate, MKMapView
             
             database.save(record) { (record, error) in
                 guard let _ = record else {
-                    print(error?.localizedDescription)
+                    print(error?.localizedDescription ?? "Unexpectedly found nil")
                     return
                 }
                 

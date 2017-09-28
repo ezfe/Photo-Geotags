@@ -69,13 +69,15 @@ class ViewController: NSViewController {
                 return record["Name"] as! String
             }))
             
+            /*
             if let minDate = locations.first?.timestamp, let maxDate = locations.last?.timestamp {
-                /*
+                
                 self.datePicker.minDate = minDate
                 self.datePicker.maxDate = maxDate
-                */
+ 
             }
-            
+             */
+ 
             enableAll()
         } else {
             pauseUI(chooserMessage: "No records...")
@@ -178,7 +180,8 @@ class ViewController: NSViewController {
         var date: Date
         
         if let scriptObject = NSAppleScript(source: script) {
-            if let output: NSAppleEventDescriptor = scriptObject.executeAndReturnError(&error), let returnedText = output.stringValue {
+            let output: NSAppleEventDescriptor = scriptObject.executeAndReturnError(&error)
+            if let returnedText = output.stringValue {
                 //Parse Date
                 
                 let dateFormatter = DateFormatter()
@@ -191,7 +194,7 @@ class ViewController: NSViewController {
                 
                 date = parsed
             } else if (error != nil) {
-                print("error: \(error)")
+                print("error: \(error!)")
                 return
             } else {
                 print("error...")
@@ -208,8 +211,8 @@ class ViewController: NSViewController {
         let location = calculateLocation(at: date, locations: self.locations)
         let string = "\(location.coordinate.latitude), \(location.coordinate.longitude)"
         
-        NSPasteboard.general().clearContents()
-        NSPasteboard.general().setString(string, forType: NSStringPboardType)
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(string, forType: NSPasteboard.PasteboardType.string)
         
         NSAppleScript(source: "tell application \"Photos\" to activate")!.executeAndReturnError(nil)
     }
@@ -298,7 +301,27 @@ class ViewController: NSViewController {
         try! data.write(toFile: "/Users/ezekielelin/Desktop/test.jpg", options: .atomic)
          */
     }
-}
+    
+    @IBAction func loadFromData(sender: Any) {
+        var clipboardItems: [String] = []
+        for element in NSPasteboard.general.pasteboardItems! {
+            if let str = element.string(forType: .string) {
+                clipboardItems.append(str)
+            }
+        }
+        
+        // Access the item in the clipboard
+        let str = clipboardItems[0] // Good Morning
+        
+        if let data = Data(base64Encoded: str) {
+            self.locations = Converter.locations(data: data)
+            self.enableAll()
+        } else {
+            print("Failed...")
+            print(str)
+        }
+    }
+}w
 
 
 

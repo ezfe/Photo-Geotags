@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11191" systemVersion="15G31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13156.6" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11191"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13156.6"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -668,6 +669,9 @@
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="480" height="270"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <connections>
+                            <outlet property="delegate" destination="B8D-0N-5wS" id="3lg-mA-zxf"/>
+                        </connections>
                     </window>
                     <connections>
                         <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
@@ -736,10 +740,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <datePickerCell key="cell" borderStyle="bezel" alignment="left" id="SQx-Zb-cIQ">
                                     <font key="font" metaFont="system"/>
-                                    <calendarDate key="date" timeIntervalSinceReferenceDate="-595929600" calendarFormat="%Y-%m-%d %H:%M:%S %z">
-                                        <!--1982-02-12 08:00:00 -0800-->
-                                        <timeZone key="timeZone" name="US/Pacific"/>
-                                    </calendarDate>
+                                    <date key="date" timeIntervalSinceReferenceDate="-595929600">
+                                        <!--1982-02-12 16:00:00 +0000-->
+                                    </date>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                     <datePickerElements key="datePickerElements" year="YES" month="YES" day="YES" hour="YES" minute="YES" second="YES"/>
@@ -770,13 +773,25 @@
                                     <action selector="loadFromPhotos:" target="XfG-lQ-9wD" id="OIa-dx-sbV"/>
                                 </connections>
                             </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XtL-DI-3fj">
+                                <rect key="frame" x="2" y="13" width="134" height="32"/>
+                                <buttonCell key="cell" type="push" title="Load from Data" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="rmS-cg-jqD">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="loadFromDataWithSender:" target="XfG-lQ-9wD" id="ZD3-V7-ank"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ICb-ZI-cGm" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="2M7-2i-U1A"/>
                             <constraint firstItem="lXe-Hl-kuA" firstAttribute="leading" secondItem="nBr-Ib-rPy" secondAttribute="trailing" constant="12" id="8Os-Wl-n2K"/>
+                            <constraint firstAttribute="bottom" secondItem="XtL-DI-3fj" secondAttribute="bottom" constant="20" id="Cwn-aT-xcd"/>
                             <constraint firstItem="ICb-ZI-cGm" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="HMd-0y-cPu"/>
                             <constraint firstAttribute="trailing" secondItem="lXe-Hl-kuA" secondAttribute="trailing" constant="28" id="IOR-l4-2zj"/>
                             <constraint firstItem="nBr-Ib-rPy" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="LvC-wN-MKG"/>
+                            <constraint firstItem="XtL-DI-3fj" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="8" id="UZm-go-qPL"/>
                             <constraint firstItem="nBr-Ib-rPy" firstAttribute="leading" secondItem="ICb-ZI-cGm" secondAttribute="trailing" constant="8" id="gQo-eu-cDl"/>
                             <constraint firstItem="lXe-Hl-kuA" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="suS-pu-Ne9"/>
                         </constraints>
