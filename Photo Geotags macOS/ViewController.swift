@@ -321,8 +321,7 @@ class ViewController: NSViewController {
             print(str)
         }
     }
-}w
-
+}
 
 
 
